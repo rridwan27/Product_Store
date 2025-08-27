@@ -1,12 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ["imgs.search.brave.com"],
     remotePatterns: [
       {
         protocol: "https",
         hostname: "lh3.googleusercontent.com",
       },
+      { protocol: "https", hostname: "fakestoreapi.com", pathname: "/img/**" },
+      { protocol: "https", hostname: "imgs.search.brave.com", pathname: "/**" },
     ],
   },
   eslint: {

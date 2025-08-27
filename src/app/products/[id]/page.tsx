@@ -1,94 +1,11 @@
-// import { notFound } from "next/navigation";
-// import mongoose from "mongoose";
-// import dbConnect from "@/lib/dbConnect";
-// import Product from "@/models/product";
-// import Link from "next/link";
-// import Navbar from "@/components/Navbar/Navbar";
-
-// type ProductRating = {
-//   rate: number;
-//   count: number;
-// };
-
-// type Product = {
-//   _id: string;
-//   title: string;
-//   price: number;
-//   description: string;
-//   category: string;
-//   image: string;
-//   rating?: ProductRating;
-//   __v: number;
-// };
-
-// export const runtime = "nodejs";
-
-// export default async function ProductDetails({
-//   params,
-// }: {
-//   params: Promise<{ id: string }>;
-// }) {
-//   const { id } = await params;
-
-//   if (!mongoose.isValidObjectId(id)) notFound();
-
-//   await dbConnect();
-//   const product = (await Product.findById(id).lean()) as Product | null;
-//   if (!product) notFound();
-
-//   return (
-//     <>
-//       <Navbar />
-//       <div className="grid gap-8 md:grid-cols-[420px_1fr]">
-//         <div className="rounded-xl border bg-white p-4 dark:bg-neutral-900">
-//           {/* eslint-disable-next-line @next/next/no-img-element */}
-//           <img
-//             src={product.image}
-//             alt={product.title}
-//             className="mx-auto aspect-square w-full max-w-[380px] rounded-lg object-contain"
-//           />
-//         </div>
-
-//         <div className="space-y-4">
-//           <h1 className="text-3xl font-bold">{product?.title}</h1>
-//           <p className="text-sm text-muted-foreground">{product?.category}</p>
-//           <div className="text-2xl font-semibold">${product?.price}</div>
-
-//           {product?.rating?.rate !== undefined && (
-//             <div className="text-sm text-muted-foreground">
-//               Rating:{" "}
-//               <span className="font-medium">{product?.rating.rate ?? 0}</span> ·{" "}
-//               <span>{product?.rating.count ?? 0} reviews</span>
-//             </div>
-//           )}
-
-//           <p className="leading-relaxed">{product.description}</p>
-
-//           <div className="flex gap-3 pt-2">
-//             <Link
-//               href="/products"
-//               className="rounded-md border px-4 py-2 text-sm hover:bg-muted"
-//             >
-//               ← Back to products
-//             </Link>
-//             <button className="rounded-md bg-black px-4 py-2 text-sm font-medium text-white dark:bg-white dark:text-black">
-//               Add to Cart
-//             </button>
-//           </div>
-//         </div>
-//       </div>
-//     </>
-//   );
-// }
-
 import { notFound } from "next/navigation";
 import mongoose from "mongoose";
 import dbConnect from "@/lib/dbConnect";
 import Product from "@/models/product";
 import Link from "next/link";
 import Navbar from "@/components/Navbar/Navbar";
-import { Button } from "@/components/ui/button"; // Assuming a Shadcn Button component
-import { Star } from "lucide-react"; // Assuming you're using lucide-react for icons
+import { Button } from "@/components/ui/button";
+import { Star } from "lucide-react";
 import Footer from "@/components/Footer/Footer";
 
 type ProductRating = {
