@@ -39,18 +39,16 @@ export async function POST(req: Request) {
     console.error("Signup error:", error);
 
     // Type guard for ZodError
-    if (error && typeof error === 'object' && 'issues' in error) {
+    if (error && typeof error === "object" && "issues" in error) {
       const zodError = error as { issues: Array<{ message: string }> };
       return NextResponse.json(
-        { error: zodError.issues[0]?.message || 'Validation error' },
+        { error: zodError.issues[0]?.message || "Validation error" },
         { status: 400 }
       );
     }
 
-    const errorMessage = error instanceof Error ? error.message : 'Something went wrong';
-    return NextResponse.json(
-      { error: errorMessage },
-      { status: 500 }
-    );
+    const errorMessage =
+      error instanceof Error ? error.message : "Something went wrong";
+    return NextResponse.json({ error: errorMessage }, { status: 500 });
   }
 }
