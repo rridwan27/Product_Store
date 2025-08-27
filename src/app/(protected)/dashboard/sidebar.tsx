@@ -39,7 +39,7 @@ const NAV_ITEMS: Item[] = [
     label: "Add Product",
     href: "/dashboard/add-product",
     icon: PackagePlus,
-    roles: ["admin"],
+    roles: ["admin", "user"],
   },
 
   { label: "Users", href: "/dashboard/users", icon: Users, roles: ["admin"] },
