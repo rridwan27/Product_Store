@@ -39,9 +39,12 @@ export const {
 
         await dbConnect();
 
-        const user = await User.findOne({ email }).select<Pick<UserType, 'password' | 'role' | 'fullName' | 'image' | 'email' | '_id'>>(
-          "+password role fullName image email"
-        );
+        const user = await User.findOne({ email }).select<
+          Pick<
+            UserType,
+            "password" | "role" | "fullName" | "image" | "email" | "_id"
+          >
+        >("+password role fullName image email");
 
         if (!user || !user.password) return null;
 
@@ -90,15 +93,20 @@ export const {
 
     async jwt({ token, user }) {
       if (user) {
-        token.role = user.role ?? token.role ?? "user";
+        token.role = (user as any).role ?? token.role ?? "user";
+        token.name = user.name ?? token.name;
+        token.picture = (user as any).image ?? token.picture;
       }
 
+      // fallback: ensure role is fetched from DB if missing
       if (!token.role && token.email) {
         await dbConnect();
         const dbUser = await User.findOne({ email: token.email })
-          .select("role")
+          .select("role fullName image")
           .lean();
         token.role = dbUser?.role ?? "user";
+        token.name = dbUser?.fullName ?? token.name;
+        token.picture = dbUser?.image ?? token.picture;
       }
 
       return token;
@@ -109,6 +117,8 @@ export const {
         session.user.id = token.sub || "";
         session.user.role =
           typeof token.role === "string" ? token.role : "user";
+        session.user.name = token.name ?? session.user.name;
+        session.user.image = (token as any).picture ?? session.user.image;
       }
       return session;
     },
