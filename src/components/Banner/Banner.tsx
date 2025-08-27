@@ -40,6 +40,8 @@ const Banner = () => {
         <div className="mt-10 lg:mt-0 lg:flex-1">
           <Image
             src="https://imgs.search.brave.com/69o8M-FAayfhs737uNWZh3QhVeO_nLSPcrqYmMlfgto/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/cG5nYWxsLmNvbS93/cC1jb250ZW50L3Vw/bG9hZHMvMi9SZWQt/U25lYWtlcnMtUE5H/LUltYWdlLnBuZw"
+            width={400}
+            height={400}
             alt="Banner product"
             className="mx-auto w-full max-w-md\ lg:max-w-lg"
           />
